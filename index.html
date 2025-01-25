@@ -5,87 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hitung Nilai Akhir</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-    <style>
-      body {
-        font-family: "Roboto", sans-serif;
-        background-color: #f4f4f9;
-        margin: 0;
-        padding: 0;
-        color: #333;
-      }
-
-      header {
-        background-color: #4caf50;
-        color: white;
-        text-align: center;
-        padding: 1rem;
-      }
-
-      main {
-        max-width: 500px;
-        margin: 2rem auto;
-        background: white;
-        padding: 2rem;
-        border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      }
-
-      h1,
-      h2 {
-        text-align: center;
-      }
-
-      label {
-        display: block;
-        margin: 1rem 0 0.5rem;
-        font-weight: bold;
-      }
-
-      input {
-        width: calc(100% - 20px);
-        padding: 0.5rem;
-        margin-bottom: 1rem;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 1rem;
-      }
-
-      button {
-        width: 100%;
-        padding: 0.7rem;
-        font-size: 1rem;
-        color: white;
-        background-color: #4caf50;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-
-      button:hover {
-        background-color: #45a049;
-      }
-
-      .result {
-        margin-top: 1.5rem;
-        padding: 1rem;
-        background-color: #e8f5e9;
-        border: 1px solid #c8e6c9;
-        border-radius: 5px;
-      }
-
-      .result p {
-        margin: 0.5rem 0;
-        font-size: 1.2rem;
-      }
-    </style>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <header>
       <h1>Hitung Nilai Akhir</h1>
     </header>
     <main>
-      <h2>Masukkan Nilai</h2>
+      <h2>Masukkan Data Siswa</h2>
       <form id="nilaiForm">
+        <label for="nama">Nama Siswa:</label>
+        <input type="text" id="nama" name="nama" required />
+
         <label for="kuis">Nilai Kuis:</label>
         <input type="number" id="kuis" name="kuis" min="0" max="100" required />
 
@@ -95,42 +26,15 @@
         <label for="uas">Nilai UAS:</label>
         <input type="number" id="uas" name="uas" min="0" max="100" required />
 
-        <button type="button" onclick="hitungNilai()">Hitung Nilai</button>
+        <button type="button" onclick="simpanData()">Simpan Data</button>
       </form>
 
-      <div class="result" id="result" style="display: none">
-        <h3>Hasil</h3>
-        <p id="nilaiAkhir"></p>
-        <p id="nilaiHuruf"></p>
+      <div class="result">
+        <h3>Daftar Siswa</h3>
+        <ul id="dataList"></ul>
+        <canvas id="chart"></canvas>
       </div>
     </main>
+    <script src="script.js"></script>
   </body>
-  <script>
-    function hitungNilai() {
-      const kuis = parseFloat(document.getElementById("kuis").value);
-      const uts = parseFloat(document.getElementById("uts").value);
-      const uas = parseFloat(document.getElementById("uas").value);
-
-      if (isNaN(kuis) || isNaN(uts) || isNaN(uas)) {
-        alert("Mohon masukkan nilai dengan benar.");
-        return;
-      }
-
-      // Perhitungan nilai akhir
-      const nilaiAkhir = 0.2 * kuis + 0.3 * uts + 0.5 * uas;
-
-      // Menentukan nilai huruf
-      let nilaiHuruf;
-      if (nilaiAkhir >= 80) nilaiHuruf = "A";
-      else if (nilaiAkhir >= 70) nilaiHuruf = "B";
-      else if (nilaiAkhir >= 60) nilaiHuruf = "C";
-      else if (nilaiAkhir >= 50) nilaiHuruf = "D";
-      else nilaiHuruf = "E";
-
-      // Menampilkan hasil
-      document.getElementById("result").style.display = "block";
-      document.getElementById("nilaiAkhir").innerText = `Nilai Akhir: ${nilaiAkhir.toFixed(2)}`;
-      document.getElementById("nilaiHuruf").innerText = `Nilai Huruf: ${nilaiHuruf}`;
-    }
-  </script>
 </html>
